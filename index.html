@@ -161,13 +161,13 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <div class="active item">
-            <div id="chartContainer1" class="chart" style="width:500px; height:650px;">
+            <div id="chartContainer1" class="chart" style="width:100%; height:650px; padding:25px;">
                 <svg width="500" height="650" font-family="sans-serif" font-size="7"></svg>
             </div>
           </div>
           <div class="item">
             <div id="chartContainer2" class="chart" style="width:40%; height:550px;"></div>
-          </div>
+          </div>	
         </div>
         
         <script>        
@@ -294,7 +294,71 @@
 <!-- Timeline -->
     <div>
         <p style="margin-left: 44%;">Click on this button to view <strong>event timeline</strong>.</p>
-        <button id='btn' style="margin-left: 48%;">Timeline</button><br>
+		<select id='state' style="margin-left: 40%;">
+			<option value="AL">Alabama</option>
+			<option value="AK">Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="DC">District Of Columbia</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+		</select>
+		
+		<select id='gender'>
+			<option value="all">Gender</option>
+			<option value="male">Male</option>
+			<option value="female">Female</option>
+		</select>
+		<select id='category'>
+			<option value="all">Category</option>
+			<option value="employment">Employment</option>
+			<option value="productivity">Productivity</option>
+		</select>
+        <button id='btn' >Timeline</button><br>
     </div>
     <div class="container-fluid blue-bg">
         <div class="container" id='timeline'>
@@ -307,15 +371,14 @@
         $(document).ready(function(){
         
             $('#btn').click(function(){
-                //$("#state").html()
-                state='AK'
-                category='all'
-                gender='all'
-                d3.csv("data/q0_all.csv", function(csv) {
+                state=$("#state").val()
+                category=$("#category").val()
+                gender=$("#gender").val()
+                d3.csv("data/q0_"+gender+".csv", function(csv) {
                     csv = csv.filter(function(row) {
                         return row['state_abbr_now'] == state;
                     });
-                    if(category='all'){
+                    if(category=='all'){
                         if(csv[0]['c3']>0){
                             $("#1").html("The employment increased by "+csv[0]['c3']+"%. </br> "+csv[0]['c4']+"% people increased their productivity.</br> "+csv[0]['c5']+"% people decreased their productivity.")
                         }
@@ -334,11 +397,11 @@
                     }
                 });
                 
-                d3.csv("data/q1_all.csv", function(csv) {
+                d3.csv("data/q1_"+gender+".csv", function(csv) {
                     csv = csv.filter(function(row) {
                         return row['state_abbr_now'] == state;
                     });
-                    if(category='all'){
+                    if(category=='all'){
                         if(csv[0]['c3']>0){
                             $("#2").html("The employment increased by "+csv[0]['c3']+"%. </br> "+csv[0]['c4']+"% people increased their productivity.</br> "+csv[0]['c5']+"% people decreased their productivity.")
                         }
@@ -357,11 +420,11 @@
                     }
                 });
         
-                p3=d3.csv("data/q2_all.csv", function(csv) {
+                p3=d3.csv("data/q2_"+gender+".csv", function(csv) {
                     csv = csv.filter(function(row) {
                         return row['state_abbr_now'] == state;
                     });
-                    if(category='all'){
+                    if(category=='all'){
                         if(csv[0]['c3']>0){
                             $("#3").html("The employment increased by "+csv[0]['c3']+"%. </br> "+csv[0]['c4']+"% people increased their productivity.</br> "+csv[0]['c5']+"% people decreased their productivity.")
                         }
