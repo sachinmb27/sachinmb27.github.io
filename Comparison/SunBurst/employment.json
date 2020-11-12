@@ -1,0 +1,41 @@
+{
+    "name": "Employment Rate",
+    "children": [
+        {
+            "name": "Pre-COVID",
+            "children": [
+                {
+                    "name": "Yes",
+                    "children": [
+                        {"name": "TechnicalProfessional", "size": 2500},
+                        {"name": "Sales/Service", "size": 1933},
+                        {"name": "Support", "size": 362},
+                        {"name": "Manufacturing", "size": 351},
+                        {"name": "Something Else", "size": 633}
+                    ]
+                },
+                {"name": "No", "size": 3557}
+            ]
+        },
+        {
+            "name": "During COVID",
+            "children": [
+                {
+                    "name": "Yes",
+                    "children": [
+                        {"name": "Yes,FullTime", "size": 3870},
+                        {"name": "Yes,PartTime", "size": 1241}
+                    ]
+                },
+                {
+                    "name": "No",
+                    "children": [
+                        {"name": "NotEmployed", "size": 3773},
+                        {"name": "LayOffNoPay", "size": 356},
+                        {"name": "LayOffWithPay", "size": 101}
+                    ]
+                }
+            ]
+        }
+    ]
+}
