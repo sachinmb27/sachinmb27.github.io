@@ -1,0 +1,44 @@
+.slice {
+    cursor: pointer;
+}
+.slice .main-arc {
+    stroke: #fff;
+    stroke-width: 1px;
+}
+.slice .hidden-arc {
+    fill: none;
+}
+.slice text {
+    pointer-events: none;
+    text-anchor: middle;
+}
+text {
+    font: 10px sans-serif;
+}
+circle {
+    stroke: #565352;
+    stroke-width: 1;
+}
+.flex-container {
+    display: flex;     
+}
+.flex-child {
+    flex: 1;
+}  
+.flex-child:first-child {
+    margin-left: 20px;
+} 
+
+.div-inline {
+    display: inline;
+}
+
+#filter-position{
+    float: right;
+    width: 300px;
+}
+
+.graph-position{
+    float: left;
+    width: calc(100% - 300px);
+}
