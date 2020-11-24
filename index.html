@@ -17,10 +17,9 @@
     <script>
         $(document).ready(function(){
             $('.combine').on('change', function(){
-                var combinedStates = $('#filter').val() + $('#state1').val() + $('#state2').val();
-                var radioValue = $("input[name='gender']:checked").val() + '.json';
-                $('#combinedStates').val(combinedStates+radioValue);
-                console.log(combinedStates+radioValue);
+                var combinedStates = 'data/' + $('#filter').val() + $('#state1').val() + $('#state2').val() + $('#gender').val() + '.json';
+                $('#combinedStates').val(combinedStates);
+                console.log(combinedStates);
             });
         })
     </script>
@@ -62,7 +61,11 @@
         <div>
         <div class="div-inline" onclick="closecomparison()"><i class="fas fa-angle-right"></i></div>
         <h3 class="div-inline" onclick="closecomparison()">Comparison between 2 states</h3>
-            <div id="filter-position">
+
+            <div id="chart" style="position: absolute; margin-left: 100px; margin-top: 50px;">
+            </div>
+
+            <div style="position: relative; float: right; width: 550px;">
                 <div>
                     <p>Use the options below to compare two states along with other filters.</p>
                 </div>
@@ -73,28 +76,29 @@
                         <option>Productivity</option>
                         <option>Employment</option>
                     </SELECT><br>
-                    <p> 
-                        <label>Gender: </label>
-                        <label><input type="radio" name="gender" value="Male">Male</label> 
-                        <label><input type="radio" name="gender" value="Female">Female</label>
-                        <label><input type="radio" name="gender" value="All">All</label>
-                    </p><br>
+                    <label>Gender: </label>
+                    <SELECT class="combine" id ="gender">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>All</option>
+                    </SELECT><br>
                     <label>State 1: </label>
                     <SELECT class="combine" id ="state1">
+                        <option>Alabama</option>
+                        <option>Alaska</option>
                         <option>Arizona</option>
                         <option>California</option>
                     </SELECT><br>
                     <label>State 2: </label>
                     <SELECT class="combine" id ="state2">
+                        <option>Alabama</option>
+                        <option>Alaska</option>
                         <option>Arizona</option>
                         <option>California</option>
                     </SELECT><br><br>
                     <input type="hidden" id="combinedStates"/>
                     <button class="btn_one" onclick="drawGraph(combinedStates.value)">Compare</button>
                 </div>
-            </div>
-
-            <div id="chart" class="graph-position">
             </div>
 
         <script src='https://d3js.org/d3.v4.min.js'></script>
@@ -105,7 +109,7 @@
         <script>
             const width = 800,
                 height = 700,
-                maxRadius = 450;
+                maxRadius = 400;
             
             const formatNumber = d3version4.format(',d');
 
@@ -160,9 +164,9 @@
                     root.sum(d => d.size);
 
                     const svg = d3version4.select('#chart').append('svg')
-                        .style('width', '600')
-                        .style('height', '600')
-                        .attr('viewBox', `${-450} ${-200} ${900} ${400}`)
+                        .style('width', '550')
+                        .style('height', '550')
+                        .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
                         .on('click', () => focusOn());
 
                     const slice = svg.selectAll('g.slice')
@@ -240,9 +244,8 @@
                 });
             }
 
-            drawGraph('ProductivityAlabamaAlaskaAll.json');
+            drawGraph('data/ProductivityAlabamaAlaskaAll.json');
         </script>
-    </div>
     </div>
     <div id="timeline_container" class="container">
             <div onclick="closetimeline()"><i class="fas fa-angle-left"></i></div>
@@ -278,9 +281,9 @@
                 </p>
             </section>
         </div>
-        <div id="footer">
+        <!-- <div id="footer">
             made on earth by a human <br> <a href="https://imfunniee.github.io">imfunniee</a>
-        </div>
+        </div> -->
     <script src="index.js" type="text/javascript"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>

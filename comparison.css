@@ -32,13 +32,3 @@ circle {
 .div-inline {
     display: inline;
 }
-
-#filter-position{
-    float: right;
-    width: 300px;
-}
-
-.graph-position{
-    float: left;
-    width: calc(100% - 300px);
-}

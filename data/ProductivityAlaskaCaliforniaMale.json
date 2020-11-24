@@ -1,0 +1,59 @@
+{
+    "name": "Productivity",
+    "children": [
+        {
+            "name": "Male",
+            "children": [
+                {
+                    "name": "California",
+                    "children": [
+                        {
+                            "name": "Increase",
+                            "children": [
+                                {"name": "LessDistractions", "size": 33},
+                                {"name": "ComfyWorkSpace", "size": 36},
+                                {"name": "NoCommute", "size": 57},
+                                {"name": "FocusBetter", "size": 22},
+                                {"name": "JobMoreDemand", "size": 24},
+                                {"name": "MoreSleep", "size": 19},
+                                {"name": "EffTimeManage", "size": 23},
+                                {"name": "MoreMultiTask", "size": 22},
+                                {"name": "FewMeetings", "size": 11},
+                                {"name": "FewOtherActivities", "size": 10},
+                                {"name": "FlexibleHours", "size": 24}
+                            ]
+                        },
+                        {
+                            "name": "Decrease",
+                            "children": [
+                                {"name": "ChildCare", "size": 14},
+                                {"name": "ElderCare", "size": 6},
+                                {"name": "CareForSickPerson", "size": 1},
+                                {"name": "DistractionAtHome", "size": 37},
+                                {"name": "DifficultToCommunicateCoworkers", "size": 28},
+                                {"name": "EqipmentNotAvailable", "size": 14},
+                                {"name": "LackofComfyWorkSpace", "size": 26},
+                                {"name": "SharingSpace", "size": 9},
+                                {"name": "NotAbleToFocus", "size": 27},
+                                {"name": "JobDemandLess", "size": 9},
+                                {"name": "PersonalSick", "size": 1},
+                                {"name": "MoreMultitasking", "size": 7}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Alaska",
+                    "children": [
+                        {
+                            "name": "Increase"
+                        },
+                        {
+                            "name": "Decrease"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
