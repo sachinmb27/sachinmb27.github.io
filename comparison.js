@@ -12,42 +12,42 @@ const width = 800,
     
     const formatNumber = d3version4.format(',d');
 
-    const x1 = d3version4.scaleLinear()
+    const x_ = d3version4.scaleLinear()
         .range([0, 2 * Math.PI])
         .clamp(true);
 
-    const y1 = d3version4.scaleSqrt()
+    const y_ = d3version4.scaleSqrt()
         .range([maxRadius*.1, maxRadius]);
 
-    const color = d3version4.scaleOrdinal(d3version4.schemeCategory20);
+    const color = d3version4.scaleOrdinal(d3version4.schemeAccent);
 
     const partition = d3version4.partition();
 
     const arc = d3version4.arc()
-        .startAngle(d => x1(d.x0))
-        .endAngle(d => x1(d.x1))
-        .innerRadius(d => Math.max(0, y1(d.y0)))
-        .outerRadius(d => Math.max(0, y1(d.y1)));
+        .startAngle(d => x_(d.x0))
+        .endAngle(d => x_(d.x1))
+        .innerRadius(d => Math.max(0, y_(d.y0)))
+        .outerRadius(d => Math.max(0, y_(d.y1)));
 
     const middleArcLine = d => {
         const halfPi = Math.PI/2;
-        const angles = [x1(d.x0) - halfPi, x1(d.x1) - halfPi];
-        const r = Math.max(0, (y1(d.y0) + y1(d.y1)) / 2);
+        const angles = [x_(d.x0) - halfPi, x_(d.x1) - halfPi];
+        const r = Math.max(0, (y_(d.y0) + y_(d.y1)) / 2);
 
         const middleAngle = (angles[1] + angles[0]) / 2;
         const invertDirection = middleAngle > 0 && middleAngle < Math.PI;
         if (invertDirection) { angles.reverse(); }
 
-        const path1 = d3version4.path();
-        path1.arc(0, 0, r, angles[0], angles[1], invertDirection);
-        return path1.toString();
+        const path_ = d3version4.path();
+        path_.arc(0, 0, r, angles[0], angles[1], invertDirection);
+        return path_.toString();
     };
 
     const textFits = d => {
         const CHAR_SPACE = 6;
 
-        const deltaAngle = x1(d.x1) - x1(d.x0);
-        const r = Math.max(0, (y1(d.y0) + y1(d.y1)) / 2);
+        const deltaAngle = x_(d.x1) - x_(d.x0);
+        const r = Math.max(0, (y_(d.y0) + y_(d.y1)) / 2);
         const perimeter = r * deltaAngle;
 
         return d.data.name.length * CHAR_SPACE < perimeter;
@@ -116,9 +116,9 @@ const width = 800,
                 const transition = svg.transition()
                                     .duration(750)
                                     .tween('scale', () => {
-                                        const xd = d3version4.interpolate(x1.domain(), [d.x0, d.x1]),
-                                        yd = d3version4.interpolate(y1.domain(), [d.y0, 1]);
-                                        return t => { x1.domain(xd(t)); y1.domain(yd(t)); };
+                                        const xd = d3version4.interpolate(x_.domain(), [d.x0, d.x1]),
+                                        yd = d3version4.interpolate(y_.domain(), [d.y0, 1]);
+                                        return t => { x_.domain(xd(t)); y_.domain(yd(t)); };
                                     });
 
                 transition.selectAll('path.main-arc')
