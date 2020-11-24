@@ -182,10 +182,11 @@
             <div onclick="closeInterestingfacts()"><i class="fas fa-angle-down"></i></div>
             <h3>Did you know how the employment has changed so far due to COVID-19 ?</h3>
             <section >
-                <div id="vis_1"></div>
-                <button class="btn_one" id="btn_male">Male</button>
-                <button class="btn_one" id="btn_female">Female</button> 
-                <button class="btn_one" id="btn_all">All</button>    
+                
+                <button class="btn_one" id="btn_male" onclick="changeGender('Men')">Male</button>
+                <button class="btn_one" id="btn_female" onclick="changeGender('Women')">Female</button> 
+                <button class="btn_one" id="btn_all" onclick="changeGender('All')">All</button> 
+                <div id="vis_1"></div>   
             </section>
         </div>
         

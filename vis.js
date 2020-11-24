@@ -1,3 +1,35 @@
+function changeGender(str){
+  d3.select( '#vis_1' ).selectAll('*').remove();
+if (str == 'Men'){
+  function parseRow ( d ) {
+    stateDataMap[d._id] = +d.Employment_increase_men;
+    maxData = Math.max(Math.abs(+d.Employment_increase_men), maxData);
+    return { 'state': d._id,
+           'code': d._id,
+           'employment_increase': +d.Employment_increase_men,
+ };
+}}
+else if (str == 'Women'){
+  function parseRow ( d ) {
+    stateDataMap[d._id] = +d.Employment_increase_women;
+    maxData = Math.max(Math.abs(+d.Employment_increase_women), maxData);
+    return { 'state': d._id,
+           'code': d._id,
+           'employment_increase': +d.Employment_increase_women,
+ };
+}
+}
+else {
+  function parseRow ( d ) {
+    stateDataMap[d._id] = +d.Employment_increase;
+    maxData = Math.max(Math.abs(+d.Employment_increase), maxData);
+    return { 'state': d._id,
+           'code': d._id,
+           'employment_increase': +d.Employment_increase,
+ };
+}
+}
+
 
 var gridmap = {};
 var stateDataMap = {};
@@ -78,7 +110,6 @@ function ready ( data ) {
   country.append( 'rect' )
       .attr( 'width', rx.rangeBand() )
       .attr( 'height', function(d) {
-          console.log(stateDataMap);
           var val = Math.abs(stateDataMap[d.key])
           return ry.rangeBand() * (1 - val/maxData);
         }
@@ -98,4 +129,4 @@ function ready ( data ) {
       svg.append("circle").attr("cx",800).attr("cy",460).attr("r", 8).style("fill", "#fc8d59")
       svg.append("text").attr("x", 820).attr("y", 435).text("Increase").style("font-size", "12px").style("fill", "#d8d8d8")
       svg.append("text").attr("x", 820).attr("y", 465).text("Decrease").style("font-size", "12px").style("fill", "#d8d8d8")
-}
+}}
