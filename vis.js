@@ -39,7 +39,7 @@ function ready ( data ) {
           .domain([ 0, d3.max( data, d => d.employment_increase ) ])
           .range([ ry.rangeBand(), 0 ])
       x = d3.scale.linear()
-          .domain( ['All'] )
+          .domain( [0, d3.max( data, d => d.employment_increase )] )
           .range([ 0, rx.rangeBand() ]);
 
   var countries = d3.nest()

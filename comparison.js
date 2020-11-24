@@ -19,7 +19,7 @@ const width = 800,
     const y_ = d3version4.scaleSqrt()
         .range([maxRadius*.1, maxRadius]);
 
-    const color = d3version4.scaleOrdinal(d3version4.schemeAccent);
+    const color = d3version4.scaleOrdinal(d3version4.schemeCategory20);
 
     const partition = d3version4.partition();
 
