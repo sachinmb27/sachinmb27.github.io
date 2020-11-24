@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>COVID-19 and the future</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="index.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v1.js"></script>
+	<script src="https://d3js.org/colorbrewer.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
     <link rel="stylesheet" href="comparison.css">
-
+    <script src='https://d3js.org/d3.v4.min.js'></script>
     <script>
-        $(document).ready(function(){
-            $('.combine').on('change', function(){
-                var combinedStates = 'data/' + $('#filter').val() + $('#state1').val() + $('#state2').val() + $('#gender').val() + '.json';
-                $('#combinedStates').val(combinedStates);
-                console.log(combinedStates);
-            });
-        })
+        d3version4 = d3
     </script>
+
 </head>
 <body>
     <div id="loading">
@@ -42,250 +43,158 @@
     <a id="Interestingfacts" onclick="showInterestingfacts()" class="animated fadeIn" style="animation-delay:2.2s;">Interesting facts</a>
     <div id="middle" class="animated slideInDown" style="animation-delay:2.0s;">
         <h1>COVID-19 and the future</h1>
-        <h2>add something here!!</h2>
+        <h2>By: Akshay Narula, Aastha Saraf, Sachin M Balakrishnan</h2>
         <div id="menu">
             <a onclick="showtimeline()">timeline</a>
             <a onclick="showcomparison()">comparison</a>
             <a onclick="showInterestingfacts()">Interesting facts</a>
         </div>
-        <table>
+        <!-- <table>
                 <tr>
                     <td class="animated zoomIn" style="animation-delay:2.2s;"><a class="social"><i class="fab fa-facebook"></i></a></td>
                     <td class="animated zoomIn" style="animation-delay:2.4s;"><a class="social"><i class="fab fa-twitter"></i></a></td>
                     <td class="animated zoomIn" style="animation-delay:2.6s;"><a class="social"><i class="fab fa-instagram"></i></a></td>
                     <td class="animated zoomIn" style="animation-delay:2.8s;"><a class="social"><i class="fab fa-dribbble"></i></a></td>
                 </tr>
-        </table>
+        </table> -->
     </div>
-    <div id="comparison_container" class="container" style="height: 100vh;">
-        <div>
+    <div id="comparison_container" class="container">
         <div class="div-inline" onclick="closecomparison()"><i class="fas fa-angle-right"></i></div>
         <h3 class="div-inline" onclick="closecomparison()">Comparison between 2 states</h3>
 
-            <div id="chart" style="position: absolute; margin-left: 100px; margin-top: 50px;">
+        <div id="chart" style="position: absolute; margin-left: 100px; margin-top: 50px;">
+        </div>
+
+        <div style="position: relative; float: right; width: 550px;">
+            <div>
+                <h3>INSTRUCTIONS</h3>
+                <ul style="font-size: 15px;">
+                    <li>Click on each slice of the sunburst graph, to view detailed results.</li>
+                    <li>To revert back to full graph, either click on the center of the graph (number of slices clicked) or click right outside the edge of the graph.</li>
+                    <li>Hover over each slide to bring up the tooltip about that slice which contains the name and size of that slice (useful for slices without labels).</li>
+                </ul>
             </div>
-
-            <div style="position: relative; float: right; width: 550px;">
-                <div>
-                    <p>Use the options below to compare two states along with other filters.</p>
-                </div>
-                <hr>
-                <div>
-                    <label>Filter: </label>
-                    <SELECT class="combine" id ="filter">
-                        <option>Productivity</option>
-                        <option>Employment</option>
-                    </SELECT><br>
-                    <label>Gender: </label>
-                    <SELECT class="combine" id ="gender">
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>All</option>
-                    </SELECT><br>
-                    <label>State 1: </label>
-                    <SELECT class="combine" id ="state1">
-                        <option>Alabama</option>
-                        <option>Alaska</option>
-                        <option>Arizona</option>
-                        <option>California</option>
-                    </SELECT><br>
-                    <label>State 2: </label>
-                    <SELECT class="combine" id ="state2">
-                        <option>Alabama</option>
-                        <option>Alaska</option>
-                        <option>Arizona</option>
-                        <option>California</option>
-                    </SELECT><br><br>
-                    <input type="hidden" id="combinedStates"/>
-                    <button class="btn_one" onclick="drawGraph(combinedStates.value)">Compare</button>
-                </div>
+            <hr>
+            <p>Use the options below to compare two states along with other filters.</p>
+            <div style="font-size: 18px; margin-left: 200px;">
+                <label>Filter: </label>
+                <SELECT class="combine" id ="filter">
+                    <option>Productivity</option>
+                    <option>Employment</option>
+                </SELECT><br><br>
+                <label>Gender: </label>
+                <SELECT class="combine" id ="gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>All</option>
+                </SELECT><br><br>
+                <label>State 1: </label>
+                <SELECT class="combine" id ="state1">
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>Arizona</option>
+                    <option>California</option>
+                </SELECT><br><br>
+                <label>State 2: </label>
+                <SELECT class="combine" id ="state2">
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>Arizona</option>
+                    <option>California</option>
+                </SELECT><br><br>
+                <input type="hidden" id="combinedStates"/>
+                <button class="btn_one" onclick="drawGraph(combinedStates.value)">Compare</button>
             </div>
-
-        <script src='https://d3js.org/d3.v4.min.js'></script>
-        <script>
-            d3version4 = d3
-        </script>
-
-        <script>
-            const width = 800,
-                height = 700,
-                maxRadius = 400;
-            
-            const formatNumber = d3version4.format(',d');
-
-            const x = d3version4.scaleLinear()
-                .range([0, 2 * Math.PI])
-                .clamp(true);
-
-            const y = d3version4.scaleSqrt()
-                .range([maxRadius*.1, maxRadius]);
-
-            const color = d3version4.scaleOrdinal(d3version4.schemeCategory20);
-
-            const partition = d3version4.partition();
-
-            const arc = d3version4.arc()
-                .startAngle(d => x(d.x0))
-                .endAngle(d => x(d.x1))
-                .innerRadius(d => Math.max(0, y(d.y0)))
-                .outerRadius(d => Math.max(0, y(d.y1)));
-
-            const middleArcLine = d => {
-                const halfPi = Math.PI/2;
-                const angles = [x(d.x0) - halfPi, x(d.x1) - halfPi];
-                const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
-
-                const middleAngle = (angles[1] + angles[0]) / 2;
-                const invertDirection = middleAngle > 0 && middleAngle < Math.PI;
-                if (invertDirection) { angles.reverse(); }
-
-                const path = d3version4.path();
-                path.arc(0, 0, r, angles[0], angles[1], invertDirection);
-                return path.toString();
-            };
-
-            const textFits = d => {
-                const CHAR_SPACE = 6;
-
-                const deltaAngle = x(d.x1) - x(d.x0);
-                const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
-                const perimeter = r * deltaAngle;
-
-                return d.data.name.length * CHAR_SPACE < perimeter;
-            };
-
-            function drawGraph(file) {
-                d3version4.json(file, (error, root) => {
-                    d3version4.select('#chart').select('svg').remove();
-
-                    if (error) throw error;
-
-                    root = d3version4.hierarchy(root);
-                    root.sum(d => d.size);
-
-                    const svg = d3version4.select('#chart').append('svg')
-                        .style('width', '550')
-                        .style('height', '550')
-                        .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
-                        .on('click', () => focusOn());
-
-                    const slice = svg.selectAll('g.slice')
-                        .data(partition(root).descendants());
-
-                    slice.exit().remove();
-
-                    const newSlice = slice.enter()
-                        .append('g').attr('class', 'slice')
-                        .on('click', d => {
-                            d3version4.event.stopPropagation();
-                            focusOn(d);
-                        });
-
-                    newSlice.append('title')
-                        .text(d => d.data.name + '\n' + formatNumber(d.value));
-            
-                    newSlice.append('path')
-                        .attr('class', 'main-arc')
-                        .style('fill', d => color((d.children ? d : d.parent).data.name))
-                        .attr('d', arc);
-
-                    newSlice.append('path')
-                        .attr('class', 'hidden-arc')
-                        .attr('id', (_, i) => `hiddenArc${i}`)
-                        .attr('d', middleArcLine);
-            
-                    const text = newSlice.append('text')
-                        .attr('display', d => textFits(d) ? null : 'none');
-
-                    text.append('textPath')
-                        .attr('startOffset','50%')
-                        .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
-                        .text(d => d.data.name)
-                        .style('fill', 'none')
-                        .style('stroke', '#fff')
-                        .style('stroke-width', 5)
-                        .style('stroke-linejoin', 'round')
-                        .style('font-size', '15px');
-
-                    text.append('textPath')
-                        .attr('startOffset','50%')
-                        .attr('xlink:href', (_, i) => `#hiddenArc${i}` )
-                        .text(d => d.data.name)
-                        .style('font-size', '15px');
-
-                    function focusOn(d = { x0: 0, x1: 1, y0: 0, y1: 1 }) {    
-                        const transition = svg.transition()
-                                            .duration(750)
-                                            .tween('scale', () => {
-                                                const xd = d3version4.interpolate(x.domain(), [d.x0, d.x1]),
-                                                yd = d3version4.interpolate(y.domain(), [d.y0, 1]);
-                                                return t => { x.domain(xd(t)); y.domain(yd(t)); };
-                                            });
-
-                        transition.selectAll('path.main-arc')
-                            .attrTween('d', d => () => arc(d));
-                
-                        transition.selectAll('path.hidden-arc')
-                            .attrTween('d', d => () => middleArcLine(d));
-                
-                        transition.selectAll('text')
-                            .attrTween('display', d => () => textFits(d) ? null : 'none');
-                
-                        moveStackToFront(d);
-            
-                        function moveStackToFront(elD) {
-                            svg.selectAll('.slice').filter(d => d === elD)
-                                .each(function(d) {
-                                    this.parentNode.appendChild(this);
-                                    if (d.parent) { moveStackToFront(d.parent); }
-                                })
-                        };
-                    }
-                });
-            }
-
-            drawGraph('data/ProductivityAlabamaAlaskaAll.json');
-        </script>
+        </div>
     </div>
     <div id="timeline_container" class="container">
-            <div onclick="closetimeline()"><i class="fas fa-angle-left"></i></div>
-            <h1>Timeline</h1>
-            <section>
-                <h2>Timeline</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-            </section>
-            <section>
-                <h2>skills</h2>
-                <p>
-                    i do eveything ;)
-                </p>
-            </section>
-        </div>
+		<div onclick="closetimeline()"><i class="fas fa-angle-left"></i></div>
+		<select id='state'>
+			<option value="AL">Alabama</option>
+			<option value="AK">Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="DC">District Of Columbia</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+		</select>
+		
+		<select id='gender'>
+			<option value="all">Gender</option>
+			<option value="male">Male</option>
+			<option value="female">Female</option>
+		</select>
+		<select id='category'>
+			<option value="all">Category</option>
+			<option value="employment">Employment</option>
+			<option value="productivity">Productivity</option>
+		</select>
+        <button id='btn' >Timeline</button><br>
+		<div id='timeline_1' style='width:60%'>
+		</div>
+            
+	</div>
           <div id="Interestingfacts_container" class="container">
             <div onclick="closeInterestingfacts()"><i class="fas fa-angle-down"></i></div>
-            <h1>Interesting facts.</h1>
-            <section>
-                <h2>Interesting facts</h2>
-                <p>
-                    <form>
-                        <input type="text" placeholder="name" required>
-                        <input type="email" placeholder="email" required><br>
-                        <textarea placeholder="your message" required rows="5"></textarea><br>
-                        <button class="btn_one">send</button>
-                    </form> 
-                </p>
+            <h3>Did you know how the employment has changed so far due to COVID-19 ?</h3>
+            <section >
+                <div id="vis_1"></div>
+                <button class="btn_one" id="btn_male">Male</button>
+                <button class="btn_one" id="btn_female">Female</button> 
+                <button class="btn_one" id="btn_all">All</button>    
             </section>
         </div>
-        <!-- <div id="footer">
-            made on earth by a human <br> <a href="https://imfunniee.github.io">imfunniee</a>
-        </div> -->
+        
+        
     <script src="index.js" type="text/javascript"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>
+    <script src="timeline.js"></script>
+    <script src="vis.js"></script>
+    <script src="comparison.js"></script>
 </body>
 </html>

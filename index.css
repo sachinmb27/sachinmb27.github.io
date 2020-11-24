@@ -136,6 +136,9 @@ body {
     transition:0.4s ease-in-out;
     border-radius:100px 100px 0px 0px;
 }
+svg {
+    font: 11px sans-serif;
+  }
 #timeline:hover {
     background:rgba(255,50,50,0.9);
     cursor:pointer;
@@ -168,16 +171,18 @@ body {
     color:rgb(255, 50, 50);
 }
 .container {
-    width:90vw;
-    height:90vh;
+    width:100vw;
+    height:100vh;
     padding:5vh 5vw;
-    background:rgb(255, 50, 50);
+    background:black;
+	opacity:0.9;
     color:#fff;
     z-index:9;
     position:fixed;
     max-height:100vh;
     overflow-y:auto;
     display:none;
+	max-width:100% !important;
 }
 .container div {
     font-size:25px;
@@ -212,13 +217,13 @@ body {
     font-size:21px;
 }
 .btn_one {
-    font-size:18px;
+    font-size:12px;
     font-family: 'Josefin Sans', sans-serif;
     color:#fff;
     background:transparent;
     border:3px solid #fff;
-    padding:8px 40px;
-    border-radius:80px;
+    padding:2px 20px;
+    border-radius:10px;
     font-weight:bold;
     margin:2vh 10px;
     transition:0.4s ease-in-out;
@@ -229,7 +234,7 @@ body {
     background:#fff;
 }
 .btn_two {
-    font-size:18px;
+    font-size:12px;
     font-family: 'Josefin Sans', sans-serif;
     color:rgb(255, 50, 50);
     background:#fff;
@@ -358,4 +363,65 @@ body {
     #box div {
         width:100%;
     }
+}
+
+.circle {
+	font-weight: 500;
+	font-size:18px !important;
+    border-radius: 100%;
+    background-color: rgb(255, 50, 50);
+    width:90px;
+	height:90px;
+}
+
+.circle p{
+	padding-top:30%;
+}
+
+.timeline div {
+	padding: 0;
+	height: 40px;
+}
+
+.timeline hr {
+	border-top: 3px solid rgb(255, 50, 50);
+	margin: 0;
+	top: 17px;
+	position: relative;
+}
+
+.timeline .col-2 {
+	display: flex;
+	overflow: hidden;
+}
+
+.timeline .corner {
+	border: 3px solid rgb(255, 50, 50);
+	width: 100%;
+	position: relative;
+	border-radius: 15px;
+}
+
+.timeline .top-right {
+	left: 50%;
+	top: -51%;
+}
+
+.timeline .left-bottom {
+	left: -50%;
+	top: calc(50% - 3px);
+}
+
+.timeline .top-left {
+	left: -50%;
+	top: -51%;
+}
+
+.timeline .right-bottom {
+	left: 50%;
+	top: calc(50% - 3px);
+}
+
+.timeline div{
+	margin:0;
 }
