@@ -3,7 +3,7 @@
 body {
     padding:0px;
     margin:0px;
-    background:linear-gradient(0deg,rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("COVID-19.jpeg") center center;
+    background-color:rgb(110,85,55);
     background-size:cover;
     width:100vw;
     height:100vh;
