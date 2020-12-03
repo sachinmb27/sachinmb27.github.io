@@ -1,53 +1,83 @@
-function showtimeline(){
-    $("#timeline_container").css("display","inherit");
-    $("#timeline_container").addClass("animated slideInLeft");
-    setTimeout(function(){
-        $("#timeline_container").removeClass("animated slideInLeft");
-    },800);
+function load(time){
+	setTimeout(function(){
+		$("#loading").addClass("animated fadeOut");
+		setTimeout(function(){
+		  $("#loading").removeClass("animated fadeOut");
+		  $("#loading").css("display","none");
+		},time);
+	},time);
 }
-function closetimeline(){
-    $("#timeline_container").addClass("animated slideOutLeft");
-    setTimeout(function(){
-        $("#timeline_container").removeClass("animated slideOutLeft");
-        $("#timeline_container").css("display","none");
-    },800);
+load(500);
+var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+states={
+    "AL": "Alabama",
+    "AK": "Alaska",
+    "AS": "American Samoa",
+    "AZ": "Arizona",
+    "AR": "Arkansas",
+    "CA": "California",
+    "CO": "Colorado",
+    "CT": "Connecticut",
+    "DE": "Delaware",
+    "DC": "District Of Columbia",
+    "FM": "Federated States Of Micronesia",
+    "FL": "Florida",
+    "GA": "Georgia",
+    "GU": "Guam",
+    "HI": "Hawaii",
+    "ID": "Idaho",
+    "IL": "Illinois",
+    "IN": "Indiana",
+    "IA": "Iowa",
+    "KS": "Kansas",
+    "KY": "Kentucky",
+    "LA": "Louisiana",
+    "ME": "Maine",
+    "MH": "Marshall Islands",
+    "MD": "Maryland",
+    "MA": "Massachusetts",
+    "MI": "Michigan",
+    "MN": "Minnesota",
+    "MS": "Mississippi",
+    "MO": "Missouri",
+    "MT": "Montana",
+    "NE": "Nebraska",
+    "NV": "Nevada",
+    "NH": "New Hampshire",
+    "NJ": "New Jersey",
+    "NM": "New Mexico",
+    "NY": "New York",
+    "NC": "North Carolina",
+    "ND": "North Dakota",
+    "MP": "Northern Mariana Islands",
+    "OH": "Ohio",
+    "OK": "Oklahoma",
+    "OR": "Oregon",
+    "PW": "Palau",
+    "PA": "Pennsylvania",
+    "PR": "Puerto Rico",
+    "RI": "Rhode Island",
+    "SC": "South Carolina",
+    "SD": "South Dakota",
+    "TN": "Tennessee",
+    "TX": "Texas",
+    "UT": "Utah",
+    "VT": "Vermont",
+    "VI": "Virgin Islands",
+    "VA": "Virginia",
+    "WA": "Washington",
+    "WV": "West Virginia",
+    "WI": "Wisconsin",
+    "WY": "Wyoming"
 }
-function showcomparison(){
-    $("#comparison_container").css("display","inherit");
-    $("#comparison_container").addClass("animated slideInRight");
-    setTimeout(function(){
-        $("#comparison_container").removeClass("animated slideInRight");
-    },800);
+var categories= ["Productivity","Employment","Jobchange"];
+var categoryVariableName=["prod","employment","jobchange","total_population"];
+var stateVars=["",""];
+var max=0;
+var colorList=['#99d594','#fc8d59','#e6f598','#ffbd59','#328bd8'];
+function resetCategoryVars(){
+	categoryVariableName=["prod","employment","jobchange","total_population"];
 }
-function closecomparison(){
-    $("#comparison_container").addClass("animated slideOutRight");
-    setTimeout(function(){
-        $("#comparison_container").removeClass("animated slideOutRight");
-        $("#comparison_container").css("display","none");
-    },800);
-}
-function showInterestingfacts(){
-    $("#Interestingfacts_container").css("display","inherit");
-    $("#Interestingfacts_container").addClass("animated slideInUp");
-    setTimeout(function(){
-        $("#Interestingfacts_container").removeClass("animated slideInUp");
-    },800);
-}
-function closeInterestingfacts(){
-    $("#Interestingfacts_container").addClass("animated slideOutDown");
-    setTimeout(function(){
-        $("#Interestingfacts_container").removeClass("animated slideOutDown");
-        $("#Interestingfacts_container").css("display","none");
-    },800);
-}
-setTimeout(function(){
-    $("#loading").addClass("animated fadeOut");
-    setTimeout(function(){
-      $("#loading").removeClass("animated fadeOut");
-      $("#loading").css("display","none");
-      $("#box").css("display","none");
-      $("#timeline").removeClass("animated fadeIn");
-      $("#Interestingfacts").removeClass("animated fadeIn");
-      $("#comparison").removeClass("animated fadeIn");
-    },1000);
-},1500);
+$( document ).ready(function() {
+    //$("#timeline .row").last().remove();
+});
